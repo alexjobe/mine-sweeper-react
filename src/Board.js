@@ -15,8 +15,8 @@ const gameStates = {
 class Board extends React.Component {
 
 	state = {
-		numRows: 10,
-		numColumns: 10,
+		numRows: 9,
+		numColumns: 9,
 		numBombs: 10,
 		numFlags: 0,
 		tiles: []
@@ -187,11 +187,12 @@ class Board extends React.Component {
 		return tiles;
 	}
 
-	revealBoard = () => {
+	revealBoard = (won) => {
 		let tiles = this.state.tiles;
 
 		tiles.forEach((row) => {
 			row.forEach((tile) => {
+				if(won) { tile.isFlagged = true; }
 				tile.isVisible = true;
 			});
 		});
@@ -215,8 +216,8 @@ class Board extends React.Component {
 
 		if(numHiddenTiles === 0)
 		{
-			this.revealBoard();
 			this.props.setGameState(gameStates.GAME_STATE_WIN);
+			this.revealBoard(true);
 		}
 	}
 
@@ -251,7 +252,9 @@ class Board extends React.Component {
 					<BombsLeftDisplay bombsLeft={this.state.numBombs - this.state.numFlags} resetFlags={this.resetFlags} />
 					<FlagButton flagMode={this.props.flagMode} toggleFlagMode={this.props.toggleFlagMode} />
 				</div>
-				{rows}
+				<div className="board-rows">
+					{rows}
+				</div>
 			</div>
 		);
 	}

@@ -51,8 +51,11 @@ class Game extends Component {
 	}
 
 	render = () => {
+		let gameClass = "game";
+		if(this.state.flagMode) { gameClass += " flagMode"; }
+
 		return (
-			<div className="game">
+			<div className={gameClass}>
 				<Board 
 					gameState = {this.state.gameState} 
 					flagMode = {this.state.flagMode}
