@@ -1,38 +1,119 @@
-.App {
-  text-align: center;
+.tile {
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+    margin-right: 1px;
+    margin-left: 1px;
+    border: none;
+    border-radius: 4px;
+    background-color: #14F3FF;
+    color: #4C2672;
+    font-size: 25px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tile.hidden {
+    color: #4C2672;
+    background-color: #4C2672;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.tile.hidden.flagged {
+    color: #14F3FF;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.tile.bomb {
+    background-color: red;
+    color: black;
 }
 
-.App-link {
-  color: #61dafb;
+.tile.zeroAdjacent {
+    color: #14F3FF;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.tile.oneAdjacent {
+    color: blue;
+}
+
+.tile.twoAdjacent {
+    color: green;
+}
+
+.tile.threeAdjacent {
+    color: red;
+}
+
+.tile.fourAdjacent {
+    color: purple;
+}
+
+.tile.fiveAdjacent {
+    color: maroon;
+}
+
+.tile.sixAdjacent {
+    color: #008385;
+}
+
+.tile.sevenAdjacent {
+    color: black;
+}
+
+.tile.eightAdjacent {
+    color: grey;
+}
+
+.tile:active {
+  transform: translateY(1px);
+  filter: saturate(150%);
+}
+
+.board-row {
+    height: 50px;
+    margin: 2px;
+    padding: 0px;
+}
+
+.board-ui {
+    margin: 10px 2px;
+    padding: 0px;
+}
+
+.btn {
+    width: 102px;
+    height: 50px;
+    padding: 0px;
+    margin: 1px;
+    border: none;
+    border-radius: 4px;
+    color: #14F3FF;
+    background-color: #4C2672;
+    font-size: 30px;
+    border: solid 1px transparent;
+}
+
+.btn:active {
+  transform: translateY(1px);
+  filter: saturate(150%);
+}
+
+.btn:hover {
+    color: #4C2672;
+    background-color: #14F3FF;
+    border-color: currentColor;
+}
+
+.btn.timer {
+    width: 206px;
+}
+
+.message-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    width: 520px;
+    height: 50px;
+    margin: 10px 2px;
+    border-radius: 4px;
+    background-color: #4C2672;
+    color: #14F3FF;
 }
