@@ -4,6 +4,7 @@ import FlagButton from './FlagButton'
 import ResetBoardButton from './ResetBoardButton';
 import BombsLeftDisplay from './BombsLeftDisplay';
 import TimerDisplay from './TimerDisplay';
+import DifficultyButton from './DifficultyButton';
 
 const gameStates = {
 	GAME_STATE_START: "GAME_STATE_START",
@@ -19,7 +20,8 @@ class Board extends React.Component {
 		numColumns: 9,
 		numBombs: 10,
 		numFlags: 0,
-		tiles: []
+		tiles: [],
+		difficulty: "Easy"
 	}
 
 	componentDidMount = () => {
@@ -43,6 +45,43 @@ class Board extends React.Component {
 
 		this.setState(st => {
 			return { tiles: tiles, numFlags: 0};
+		});
+	}
+
+	toggleDifficulty = () => {
+		let nextDifficulty = ""
+		let numRows = 0;
+		let numColumns = 0;
+		let numBombs = 0;
+
+		switch (this.state.difficulty) {
+			case "Easy":
+				nextDifficulty = "Medium";
+				numRows = numColumns = 16;
+				numBombs = 40;
+				break;
+			case "Medium":
+				nextDifficulty = "Hard";
+				numRows = 30;
+				numColumns = 16;
+				numBombs = 99;
+				break;
+			case "Hard":
+				nextDifficulty = "Easy";
+				numRows = numColumns = 9;
+				numBombs = 10;
+				break;
+			default:
+				nextDifficulty = "Easy";
+				numRows = numColumns = 9;
+				numBombs = 10;
+				break;
+		}
+
+		this.setState(
+			{ numRows: numRows, numColumns: numColumns, numBombs: numBombs, difficulty: nextDifficulty }
+			, () => {
+			this.resetBoard();
 		});
 	}
 
@@ -247,7 +286,10 @@ class Board extends React.Component {
 		return (
 			<div className="board">
 				<div className="board-ui">
-					<TimerDisplay numSeconds= {this.props.numSeconds}/>
+					{ this.props.gameState === gameStates.GAME_STATE_START ? 
+						<DifficultyButton difficulty={this.state.difficulty} toggleDifficulty={this.toggleDifficulty} /> 
+						: <TimerDisplay numSeconds={this.props.numSeconds} /> 
+					}
 					<ResetBoardButton resetBoard={this.resetBoard} />
 					<BombsLeftDisplay bombsLeft={this.state.numBombs - this.state.numFlags} resetFlags={this.resetFlags} />
 					<FlagButton flagMode={this.props.flagMode} toggleFlagMode={this.props.toggleFlagMode} />

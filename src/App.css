@@ -155,7 +155,7 @@ body {
     border-color: currentColor;
 }
 
-.btn.timer {
+.btn.timer, .btn.difficulty-button {
     width: 206px;
 }
 
@@ -170,6 +170,6 @@ body {
     height: 50px;
     margin: 10px 2px;
     border-radius: 4px;
-    background-color: #4C2672;
-    color: #14F3FF;
+    background-color: #a1ffc5;
+    color: #4C2672;
 }
